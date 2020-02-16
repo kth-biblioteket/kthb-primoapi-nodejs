@@ -13,9 +13,10 @@ exports.getNewBookById = async function (req, res) {
         database: config.db
     });
 
-    sql = `SELECT * FROM newbooks WHERE id = ${req.params.id}`;
-    result = await db.query(sql);
-	res.json(result);
+    sql = `SELECT * FROM newbooks WHERE id = ? `;
+    await db.query(sql, req.params.id, function (err, result) {
+        res.json(result);
+    });
     db.end();
 };
 
