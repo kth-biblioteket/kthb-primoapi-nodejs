@@ -14,7 +14,7 @@ exports.getNewBookById = async function (req, res) {
     });
 
     sql = `SELECT * FROM newbooks WHERE id = ? `;
-    await db.query(sql, req.params.id, function (err, result) {
+    await db.query(sql, [req.params.id], function (err, result) {
         res.json(result);
     });
     db.end();
